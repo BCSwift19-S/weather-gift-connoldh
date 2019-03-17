@@ -17,13 +17,14 @@ class DetailVC: UIViewController {
     @IBOutlet weak var currentImage: UIImageView!
     
     var currentPage = 0
-    var locationsArray = [String]()
+    var locationsArray = [WeatherLocation]()
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationLabel.text = locationsArray[currentPage]
+        locationLabel.text = locationsArray[currentPage].name
+        
         
         // Do any additional setup after loading the view.
     }
