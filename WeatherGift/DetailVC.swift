@@ -43,6 +43,8 @@ class DetailVC: UIViewController {
         locationLabel.text = locationsArray[currentPage].name
         dateLabel.text = locationsArray[currentPage].coordinates
         temperatureLabel.text = locationsArray[currentPage].currentTemp
+        summaryLabel.text = locationsArray[currentPage].currentSummary
+        currentImage.image = UIImage(named: locationsArray[currentPage].currentIcon)
     }
     
     
@@ -82,7 +84,7 @@ extension DetailVC: CLLocationManagerDelegate {
         let currentCoordinates = "\(currentLatitude),\(currentLongitude)"
         dateLabel.text = currentCoordinates
         geoCoder.reverseGeocodeLocation(currentLocation, completionHandler:
-            {placemarks, error in
+            { placemarks, error in
                 if placemarks != nil {
                     let placemark = placemarks?.last
                     place = (placemark?.name)!
@@ -97,6 +99,8 @@ extension DetailVC: CLLocationManagerDelegate {
                 }
         })
     }
+    
+
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to get user location.")
