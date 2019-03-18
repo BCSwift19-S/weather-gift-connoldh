@@ -83,6 +83,7 @@ extension DetailVC: CLLocationManagerDelegate {
         let currentLongitude = currentLocation.coordinate.longitude
         let currentCoordinates = "\(currentLatitude),\(currentLongitude)"
         dateLabel.text = currentCoordinates
+        print("!!!!\(currentCoordinates)")
         geoCoder.reverseGeocodeLocation(currentLocation, completionHandler:
             { placemarks, error in
                 if placemarks != nil {
