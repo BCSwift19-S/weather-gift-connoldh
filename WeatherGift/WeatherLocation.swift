@@ -8,21 +8,34 @@
 
 import Foundation
 import Alamofire
-
+import SwiftyJSON
 
 class WeatherLocation {
     var name = ""
     var coordinates = ""
+    var currentTemp = "--"
     
-    func getWeather() {
-        let weatherURL = urlBase+urlAPIKey+coordinates
-        print(weatherURL)
+    func getWeather(completed: @escaping () -> ()) {
+        let weatherURL = urlBase + urlAPIKey + coordinates
         
         Alamofire.request(weatherURL).responseJSON { response in
-            print(response)
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                if let temperature = json["currently"]["temperature"].double {
+                    let roundedTemp = String(format: "%3.f", temperature)
+                    self.currentTemp = roundedTemp + "°"
+                    print("***** \(weatherURL)")
+                }else {
+                    print("Could not return a temp")
+                }
+            case .failure(let error):
+                print(error)
+            }
+            completed()
         }
-    }
         
+    }
 }
 
 
