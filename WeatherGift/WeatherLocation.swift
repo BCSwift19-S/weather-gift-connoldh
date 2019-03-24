@@ -30,7 +30,6 @@ class WeatherLocation {
                 if let temperature = json["currently"]["temperature"].double {
                     let roundedTemp = String(format: "%3.f", temperature)
                     self.currentTemp = roundedTemp + "°"
-                    print("***** \(weatherURL)")
                 }else {
                     print("Could not return a temp")
                 }
